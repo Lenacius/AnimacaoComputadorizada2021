@@ -87,22 +87,22 @@ public class PlayerAgent : Agent{
         if (CheckTargetZone(workTrans) && !player.inWork)
         {
             if (movement_command != 1) AddReward(-0.1f);
-            else AddReward(0.1f);
+            else AddReward(0.5f);
         }
         else if (CheckTargetZone(eatTrans) && !player.inLunch)
         {
             if (movement_command != 1) AddReward(-0.1f);
-            else AddReward(0.1f);
+            else AddReward(0.5f);
         }
         else if (CheckTargetZone(sleepTrans) && !player.inSleep)
         {
             if (movement_command != 1) AddReward(-0.1f);
-            else AddReward(0.1f);
+            else AddReward(0.5f);
         }
         else if (CheckTargetZone(playTrans) && !player.inPlay)
         {
             if (movement_command != 1) AddReward(-0.1f);
-            else AddReward(0.1f);
+            else AddReward(0.5f);
         }
     }
     bool CheckTargetZone(Transform current_zone)
@@ -115,22 +115,22 @@ public class PlayerAgent : Agent{
         if (other.tag == "Work" && CheckTargetZone(workTrans))
         {
             if (moveForward != 0) AddReward(-0.1f);
-            else AddReward(0.1f);
+            else AddReward(0.5f);
         }
         else if (other.tag == "Play" && CheckTargetZone(playTrans))
         {
             if (moveForward != 0) AddReward(-0.1f);
-            else AddReward(0.1f);
+            else AddReward(0.5f);
         }
         else if (other.tag == "Eat" && CheckTargetZone(eatTrans))
         {
             if (moveForward != 0) AddReward(-0.1f);
-            else AddReward(0.1f);
+            else AddReward(0.5f);
         }
         else if (other.tag == "Sleep" && CheckTargetZone(sleepTrans))
         {
             if (moveForward != 0) AddReward(-0.1f);
-            else AddReward(0.1f);
+            else AddReward(0.5f);
         }
     }
 
@@ -139,7 +139,7 @@ public class PlayerAgent : Agent{
         if(collision.collider.tag == "Wall")
         {
             if (rotate == 0) AddReward(-10f);
-            else AddReward(-1f);
+            else AddReward(1f);
         }
     }
 
@@ -190,7 +190,7 @@ public class PlayerAgent : Agent{
 
     private void CheckPriorityTask()
     {
-        if (player.energy < 25)
+        if (player.energy < 40)
         {
             wantSleep = true;
             targetTransform = sleepTrans;
@@ -201,7 +201,7 @@ public class PlayerAgent : Agent{
         }
         else
         {
-            if(player.hungry > 75)
+            if(player.hungry > 60)
             {
                 wantEat = true;
                 targetTransform = eatTrans;
@@ -211,7 +211,7 @@ public class PlayerAgent : Agent{
             }
             else
             {
-                if(player.mood < 25)
+                if(player.mood < 40)
                 {
                     wantPlay = true;
                     targetTransform = playTrans;
